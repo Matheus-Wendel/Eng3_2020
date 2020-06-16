@@ -2,9 +2,13 @@ package com.fatec.mogi.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+@Entity
 public class FichaTecnicaLinha extends EntidadeDominio {
 
 	private String descricao;
+	@ManyToMany
 	private List<Acessorio> acessorios;
 
 	public FichaTecnicaLinha(String nome, String descricao, List<Acessorio> acessorios) {

@@ -1,5 +1,8 @@
 package com.fatec.mogi.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Acessorio extends EntidadeDominio {
 	private String descricao;
 	private int quantidade;

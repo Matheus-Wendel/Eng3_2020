@@ -2,6 +2,9 @@ package com.fatec.mogi.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+@Entity
 public class FichaTecnicaProduto extends EntidadeDominio {
 
 	private String categoria;
@@ -12,6 +15,7 @@ public class FichaTecnicaProduto extends EntidadeDominio {
 	private String componenteSecundario;
 	private String observacoes;
 
+	@ManyToMany
 	private List<Acessorio> acessorios;
 	
 	

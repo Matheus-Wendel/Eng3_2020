@@ -3,20 +3,33 @@ package com.fatec.mogi.model;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+@Entity
 public class Produto extends EntidadeDominio {
 
 	private double valorCompra;
 	private Calendar dataEntrega;
 	private int quantidade;
 	private boolean ativo;
+	@ManyToOne
+	@JoinColumn(name = "comprador_id")
 	private Comprador comprador;
+	@OneToOne
+	@JoinColumn(name = "produto_id")
 	private FichaTecnicaProduto fichaTecnica;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "produto_linha",
+			joinColumns = @JoinColumn(name ="produto_id"),
+			inverseJoinColumns = @JoinColumn(name="linha_id"))
 	private List<Linha> linhas;
 	
-	
-	
-	
-
 	
 	public Produto(String nome, double valorCompra, Calendar dataEntrega, int quantidade, boolean ativo,
 			Comprador comprador, FichaTecnicaProduto fichaTecnica, List<Linha> linhas) {

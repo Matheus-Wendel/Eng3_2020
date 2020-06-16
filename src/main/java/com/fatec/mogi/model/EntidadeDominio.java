@@ -2,25 +2,38 @@ package com.fatec.mogi.model;
 
 import java.util.Calendar;
 
-public abstract class EntidadeDominio {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-	private int id;
+@MappedSuperclass
+public abstract class EntidadeDominio {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	
 	private Calendar dthrCadastro;
+	
 	private String nome;
-	
-	
 
 	public EntidadeDominio(String nome) {
 		this.nome = nome;
 	}
 
-	public int getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public Calendar getDthrCadastro() {
 		return dthrCadastro;
