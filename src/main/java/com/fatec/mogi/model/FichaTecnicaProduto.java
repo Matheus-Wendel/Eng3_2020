@@ -33,6 +33,9 @@ public class FichaTecnicaProduto extends EntidadeDominio {
 		this.observacoes = observacoes;
 		this.acessorios = acessorios;
 	}
+	public FichaTecnicaProduto() {
+
+	}
 
 	public String getCategoria() {
 		return categoria;

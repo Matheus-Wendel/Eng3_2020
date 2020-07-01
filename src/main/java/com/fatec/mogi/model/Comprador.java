@@ -13,6 +13,8 @@ public class Comprador extends Pessoa {
 		this.login = login;
 		this.senha = senha;
 	}
+	public Comprador() {
+	}
 
 	public String getLogin() {
 		return login;

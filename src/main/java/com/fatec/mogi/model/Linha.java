@@ -26,6 +26,9 @@ public class Linha extends EntidadeDominio {
 		Produtos = produtos;
 	}
 
+	public Linha() {
+	}
+
 	public List<Produto> getProdutos() {
 		return Produtos;
 	}

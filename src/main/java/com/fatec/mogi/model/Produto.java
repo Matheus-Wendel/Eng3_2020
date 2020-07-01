@@ -43,6 +43,9 @@ public class Produto extends EntidadeDominio {
 		this.linhas = linhas;
 	}
 
+	public Produto() {
+	}
+
 	public double getValorCompra() {
 		return valorCompra;
 	}

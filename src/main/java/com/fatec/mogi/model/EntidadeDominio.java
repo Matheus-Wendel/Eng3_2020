@@ -20,6 +20,9 @@ public abstract class EntidadeDominio {
 	public EntidadeDominio(String nome) {
 		this.nome = nome;
 	}
+	public EntidadeDominio() {
+		
+	}
 
 
 
