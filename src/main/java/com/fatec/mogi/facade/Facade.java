@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fatec.mogi.DAO.IDAO;
@@ -17,40 +18,42 @@ public class Facade implements Ifacade {
 	
 	@Autowired
 	public Facade(Map<String, IDAO> mapDAO) {
-		this.mapDAO = mapDAO;
-		
-	
-
-			for (String s : mapDAO.keySet()) {
-				System.err.println(s);
-			}
-		
+		this.mapDAO = mapDAO;		
 	}
 	
 	private IDAO getDAO(EntidadeDominio entidade) {
-		return mapDAO.get(entidade.getClass().getSimpleName().toLowerCase() + "DAO");
+		String nomeDAO = entidade.getClass().getSimpleName();
+		nomeDAO = Character.toLowerCase(nomeDAO.charAt(0)) + nomeDAO.substring(1)+"DAO";
+		return mapDAO.get(nomeDAO);
 	}
 	
 	
 	@Override
-	public void save(EntidadeDominio entidade) {
+	public ResponseEntity<EntidadeDominio> save(EntidadeDominio entidade) {
 		IDAO daoGenerico = getDAO(entidade);
-		daoGenerico.save(entidade);
+		return daoGenerico.save(entidade);
 	}
 
 	@Override
-	public void delete(EntidadeDominio entidade) {
+	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidade) {
 		IDAO daoGenerico = getDAO(entidade);
-		daoGenerico.save(entidade);
+		return daoGenerico.update(entidade);
+	}
+
+	@Override
+	public ResponseEntity<EntidadeDominio> delete(EntidadeDominio entidade) {
+		IDAO daoGenerico = getDAO(entidade);
+		return daoGenerico.delete(entidade);
 		
 	}
 
 	@Override
-	public List<EntidadeDominio> find(EntidadeDominio entidade) {
+	public ResponseEntity<List<? extends EntidadeDominio>> find(EntidadeDominio entidade) {
 		IDAO daoGenerico = getDAO(entidade);
-		daoGenerico.save(entidade);
-		return null;
+		return daoGenerico.find(entidade);
+		
 	}
+
 
 	
 
