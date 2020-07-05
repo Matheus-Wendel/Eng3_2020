@@ -3,6 +3,7 @@ package com.fatec.mogi.model;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -10,12 +11,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Where;
 @Entity
+@Where(clause="ativo=1")
 public class Produto extends EntidadeDominio {
 
 	private double valorCompra;
 	private Calendar dataEntrega;
 	private int quantidade;
+	@Column(name = "ativo")
 	private boolean ativo;
 	@ManyToOne
 	@JoinColumn(name = "comprador_id")
