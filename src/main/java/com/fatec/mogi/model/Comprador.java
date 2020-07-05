@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Comprador extends Pessoa {
+public class Comprador extends EntidadeDominio {
 	@Column(unique = true)
 	private String login;
 	private String senha;
