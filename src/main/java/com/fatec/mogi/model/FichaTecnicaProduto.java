@@ -3,7 +3,9 @@ package com.fatec.mogi.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FichaTecnicaProduto extends EntidadeDominio {
@@ -11,15 +13,19 @@ public class FichaTecnicaProduto extends EntidadeDominio {
 	private String categoria;
 	private String subcategoria;
 	private String descricao;
-	private String componenteBasico;
-	private String componentePrimario;
-	private String componenteSecundario;
+	@ManyToOne
+	@JoinColumn(name = "componente_basico_id")
+	private Componente componenteBasico;
+	@ManyToOne
+	@JoinColumn(name = "componente_primario_id")
+	private Componente componentePrimario;
+	@ManyToOne
+	@JoinColumn(name = "componente_secundario_id")
+	private Componente componenteSecundario;
 	private String observacoes;
 
 	@ManyToMany
 	private List<Acessorio> acessorios;
-
-
 
 	public String getCategoria() {
 		return categoria;
@@ -45,27 +51,27 @@ public class FichaTecnicaProduto extends EntidadeDominio {
 		this.descricao = descricao;
 	}
 
-	public String getComponenteBasico() {
+	public Componente getComponenteBasico() {
 		return componenteBasico;
 	}
 
-	public void setComponenteBasico(String componenteBasico) {
+	public void setComponenteBasico(Componente componenteBasico) {
 		this.componenteBasico = componenteBasico;
 	}
 
-	public String getComponentePrimario() {
+	public Componente getComponentePrimario() {
 		return componentePrimario;
 	}
 
-	public void setComponentePrimario(String componentePrimario) {
+	public void setComponentePrimario(Componente componentePrimario) {
 		this.componentePrimario = componentePrimario;
 	}
 
-	public String getComponenteSecundario() {
+	public Componente getComponenteSecundario() {
 		return componenteSecundario;
 	}
 
-	public void setComponenteSecundario(String componenteSecundario) {
+	public void setComponenteSecundario(Componente componenteSecundario) {
 		this.componenteSecundario = componenteSecundario;
 	}
 
