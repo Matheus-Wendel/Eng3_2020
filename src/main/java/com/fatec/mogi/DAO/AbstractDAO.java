@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,7 @@ import com.fatec.mogi.model.EntidadeDominio;
 
 public class AbstractDAO<T extends EntidadeDominio> implements IDAO {
 
-	private JpaRepository<T, Integer> repositorio;
+	protected JpaRepository<T, Integer> repositorio;
 
 	public AbstractDAO(JpaRepository<T, Integer> repo) {
 		this.repositorio = repo;
@@ -32,6 +34,7 @@ public class AbstractDAO<T extends EntidadeDominio> implements IDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public ResponseEntity<EntidadeDominio> delete(EntidadeDominio entidadeDominio) {
 		T entidade = (T) entidadeDominio;
 		try {
@@ -79,6 +82,7 @@ public class AbstractDAO<T extends EntidadeDominio> implements IDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidadeDominio) {
 		T entidade = (T) entidadeDominio;
 		try {
