@@ -1,20 +1,15 @@
 package com.fatec.mogi.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Comprador extends Pessoa {
-
+	@Column(unique = true)
 	private String login;
 	private String senha;
 
-	public Comprador(String nome, String login, String senha) {
-		super(nome);
-		this.login = login;
-		this.senha = senha;
-	}
-	public Comprador() {
-	}
+	
 
 	public String getLogin() {
 		return login;

@@ -31,20 +31,7 @@ public class Produto extends EntidadeDominio {
 	private List<Linha> linhas;
 	
 	
-	public Produto(String nome, double valorCompra, Calendar dataEntrega, int quantidade, boolean ativo,
-			Comprador comprador, FichaTecnicaProduto fichaTecnica, List<Linha> linhas) {
-		super(nome);
-		this.valorCompra = valorCompra;
-		this.dataEntrega = dataEntrega;
-		this.quantidade = quantidade;
-		this.ativo = ativo;
-		this.comprador = comprador;
-		this.fichaTecnica = fichaTecnica;
-		this.linhas = linhas;
-	}
-
-	public Produto() {
-	}
+	
 
 	public double getValorCompra() {
 		return valorCompra;

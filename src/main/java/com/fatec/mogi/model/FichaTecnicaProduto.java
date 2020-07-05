@@ -4,38 +4,22 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+
 @Entity
 public class FichaTecnicaProduto extends EntidadeDominio {
 
 	private String categoria;
 	private String subcategoria;
 	private String descricao;
-	private String componeteBasico;
+	private String componenteBasico;
 	private String componentePrimario;
 	private String componenteSecundario;
 	private String observacoes;
 
 	@ManyToMany
 	private List<Acessorio> acessorios;
-	
-	
 
-	public FichaTecnicaProduto(String nome, String categoria, String subcategoria, String descricao,
-			String componeteBasico, String componentePrimario, String componenteSecundario, String observacoes,
-			List<Acessorio> acessorios) {
-		super(nome);
-		this.categoria = categoria;
-		this.subcategoria = subcategoria;
-		this.descricao = descricao;
-		this.componeteBasico = componeteBasico;
-		this.componentePrimario = componentePrimario;
-		this.componenteSecundario = componenteSecundario;
-		this.observacoes = observacoes;
-		this.acessorios = acessorios;
-	}
-	public FichaTecnicaProduto() {
 
-	}
 
 	public String getCategoria() {
 		return categoria;
@@ -61,12 +45,12 @@ public class FichaTecnicaProduto extends EntidadeDominio {
 		this.descricao = descricao;
 	}
 
-	public String getComponeteBasico() {
-		return componeteBasico;
+	public String getComponenteBasico() {
+		return componenteBasico;
 	}
 
-	public void setComponeteBasico(String componeteBasico) {
-		this.componeteBasico = componeteBasico;
+	public void setComponenteBasico(String componenteBasico) {
+		this.componenteBasico = componenteBasico;
 	}
 
 	public String getComponentePrimario() {

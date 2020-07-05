@@ -19,15 +19,7 @@ public class Linha extends EntidadeDominio {
 
 	List<Produto> Produtos;
 
-	public Linha(String nome, String descricao, FichaTecnicaLinha fichaTecnica, List<Produto> produtos) {
-		super(nome);
-		this.descricao = descricao;
-		this.fichaTecnica = fichaTecnica;
-		Produtos = produtos;
-	}
 
-	public Linha() {
-	}
 
 	public List<Produto> getProdutos() {
 		return Produtos;

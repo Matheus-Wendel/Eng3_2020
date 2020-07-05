@@ -7,14 +7,6 @@ public class Acessorio extends EntidadeDominio {
 	private String descricao;
 	private int quantidade;
 
-	
-	
-	public Acessorio(String nome, String descricao, int quantidade) {
-		super(nome);
-		this.descricao = descricao;
-		this.quantidade = quantidade;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}

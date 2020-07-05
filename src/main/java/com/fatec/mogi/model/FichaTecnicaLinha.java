@@ -11,11 +11,7 @@ public class FichaTecnicaLinha extends EntidadeDominio {
 	@ManyToMany
 	private List<Acessorio> acessorios;
 
-	public FichaTecnicaLinha(String nome, String descricao, List<Acessorio> acessorios) {
-		super(nome);
-		this.descricao = descricao;
-		this.acessorios = acessorios;
-	}
+	
 
 	public String getDescricao() {
 		return descricao;
