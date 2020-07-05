@@ -11,12 +11,14 @@ public class StrategyUtil {
 	public Map<String, List<IStrategy>> getStrategies(){
 		
 		List<IStrategy> validacoesComprador = new ArrayList<>();
+		List<IStrategy> validacoesProduto = new ArrayList<>();
 		
 		
 		
 		
 		
 		validacoesComprador.add(new EncriptarSenha());
+		validacoesProduto.add(new ValidaProduto());
 		
 		
 		
@@ -24,6 +26,7 @@ public class StrategyUtil {
 		
 		Map<String, List<IStrategy>> mapaStrategies = new HashMap<>();
 		mapaStrategies.put("comprador", validacoesComprador);
+		mapaStrategies.put("produto", validacoesProduto);
 		
 		return mapaStrategies;
 		
