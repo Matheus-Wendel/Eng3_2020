@@ -44,6 +44,9 @@ public class Facade implements Ifacade {
 
 	private String processarStrategies(List<IStrategy> strategies, EntidadeDominio entidade) {
 		StringBuilder sb = new StringBuilder();
+		if(strategies==null||strategies.isEmpty()) {
+			return sb.toString();
+		}
 		for (IStrategy iStrategy : strategies) {
 			sb.append(iStrategy.processar(entidade));
 		}
