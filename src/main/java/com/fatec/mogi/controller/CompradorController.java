@@ -7,6 +7,6 @@ import com.fatec.mogi.model.Comprador;
 
 @RestController
 @RequestMapping("/comprador")
-public class compradorController extends AbstractController<Comprador> {
+public class CompradorController extends AbstractController<Comprador> {
 
 }
