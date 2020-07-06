@@ -17,7 +17,7 @@ public class StrategyUtil {
 		
 		
 		
-		validacoesComprador.add(new EncriptarSenha());
+		validacoesComprador.add(new ValidaSenha());
 		validacoesProduto.add(new ValidaProduto());
 		
 		
