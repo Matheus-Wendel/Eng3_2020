@@ -1,6 +1,7 @@
 package com.fatec.mogi.auth;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -59,5 +60,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	                .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
 	                .sign(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()));
 	        res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+	        
+	        PrintWriter writer = res.getWriter();
+	        res.setContentType("application/json");
+	        res.setCharacterEncoding("UTF-8");
+	        
+	        String body ="{\"Authorization\":\""+ SecurityConstants.TOKEN_PREFIX + token+"\"}";
+			writer.print(body.toString());
+	        writer.flush();
+
 	    }
 }
