@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fatec.mogi.DAO.IDAO;
+import com.fatec.mogi.log.GeraLog;
+import com.fatec.mogi.log.OperacaoEnum;
 import com.fatec.mogi.model.EntidadeDominio;
 import com.fatec.mogi.strategy.IStrategy;
 import com.fatec.mogi.strategy.StrategyUtil;
@@ -18,16 +20,50 @@ public class Facade implements Ifacade {
 
 	private Map<String, IDAO> mapDAO;
 	private Map<String, List<IStrategy>> mapStrategy;
+	private GeraLog log;
 
 	@Autowired
-	public Facade(Map<String, IDAO> mapDAO) {
+	public Facade(Map<String, IDAO> mapDAO, GeraLog geralog) {
 		this.mapDAO = mapDAO;
 		StrategyUtil util = new StrategyUtil();
-
+		this.log = geralog;
 		mapStrategy = util.getStrategies();
-		for (String chave : this.mapDAO.keySet()) {
-			System.err.println(chave);
+	}
+
+	@Override
+	public ResponseEntity<EntidadeDominio> save(EntidadeDominio entidade) {
+		String validacao = processarStrategies(getStrategies(entidade), entidade);
+		if (validacao.isBlank()) {
+			IDAO daoGenerico = getDAO(entidade);
+			ResponseEntity<EntidadeDominio> entidadeSalva = daoGenerico.save(entidade);
+			log.GerarLog(entidade, OperacaoEnum.SALVAR);
+			return entidadeSalva;
 		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	}
+
+	@Override
+	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidade) {
+		IDAO daoGenerico = getDAO(entidade);
+		ResponseEntity<EntidadeDominio> entidadeAtualizada = daoGenerico.update(entidade);
+		log.GerarLog(entidade, OperacaoEnum.ATUALIZAR);
+		return entidadeAtualizada;
+	}
+
+	@Override
+	public ResponseEntity<EntidadeDominio> delete(EntidadeDominio entidade) {
+		IDAO daoGenerico = getDAO(entidade);
+		ResponseEntity<EntidadeDominio> entidadeDeletada = daoGenerico.delete(entidade);
+		log.GerarLog(entidade, OperacaoEnum.EXCLUIR);
+		return entidadeDeletada;
+
+	}
+
+	@Override
+	public ResponseEntity<List<? extends EntidadeDominio>> find(EntidadeDominio entidade) {
+		IDAO daoGenerico = getDAO(entidade);
+		return daoGenerico.find(entidade);
+
 	}
 
 	private IDAO getDAO(EntidadeDominio entidade) {
@@ -44,7 +80,7 @@ public class Facade implements Ifacade {
 
 	private String processarStrategies(List<IStrategy> strategies, EntidadeDominio entidade) {
 		StringBuilder sb = new StringBuilder();
-		if(strategies==null||strategies.isEmpty()) {
+		if (strategies == null || strategies.isEmpty()) {
 			return sb.toString();
 		}
 		for (IStrategy iStrategy : strategies) {
@@ -52,35 +88,4 @@ public class Facade implements Ifacade {
 		}
 		return sb.toString();
 	}
-
-	@Override
-	public ResponseEntity<EntidadeDominio> save(EntidadeDominio entidade) {
-		String validacao = processarStrategies(getStrategies(entidade), entidade);
-		if (validacao.isBlank()) {
-			IDAO daoGenerico = getDAO(entidade);
-			return daoGenerico.save(entidade);
-		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	}
-
-	@Override
-	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidade) {
-		IDAO daoGenerico = getDAO(entidade);
-		return daoGenerico.update(entidade);
-	}
-
-	@Override
-	public ResponseEntity<EntidadeDominio> delete(EntidadeDominio entidade) {
-		IDAO daoGenerico = getDAO(entidade);
-		return daoGenerico.delete(entidade);
-
-	}
-
-	@Override
-	public ResponseEntity<List<? extends EntidadeDominio>> find(EntidadeDominio entidade) {
-		IDAO daoGenerico = getDAO(entidade);
-		return daoGenerico.find(entidade);
-
-	}
-
 }
