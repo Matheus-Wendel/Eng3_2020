@@ -33,7 +33,7 @@ public class Facade implements Ifacade {
 	@Override
 	public ResponseEntity<EntidadeDominio> save(EntidadeDominio entidade) {
 		String validacao = processarStrategies(getStrategies(entidade), entidade);
-		if (validacao.isBlank()) {
+		if (validacao.isEmpty()) {
 			IDAO daoGenerico = getDAO(entidade);
 			ResponseEntity<EntidadeDominio> entidadeSalva = daoGenerico.save(entidade);
 			log.GerarLog(entidade, OperacaoEnum.SALVAR);
