@@ -8,25 +8,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Linha extends EntidadeDominio {
 
 	private String descricao;
 	@OneToOne
-	@JoinColumn(name = "linha_id")
+	@JoinColumn(name = "ficha_tecnica_linha_id")
 	private FichaTecnicaLinha fichaTecnica;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "linhas")
+	@JsonIgnoreProperties("linhas")
+	List<Produto> produtos;
 
-	List<Produto> Produtos;
 
 
+	
 
 	public List<Produto> getProdutos() {
-		return Produtos;
+		return produtos;
 	}
 
 	public void setProdutos(List<Produto> produtos) {
-		Produtos = produtos;
+		this.produtos = produtos;
 	}
 
 	public String getDescricao() {

@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Where(clause="ativo=1")
 public class Produto extends EntidadeDominio {
@@ -31,6 +33,7 @@ public class Produto extends EntidadeDominio {
 	@OneToOne
 	@JoinColumn(name = "ficha_tecnica_id")
 	private FichaTecnicaProduto fichaTecnica;
+	@JsonIgnoreProperties("produtos")
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "produto_linha",
