@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Where;
 @Entity
@@ -18,6 +20,7 @@ import org.hibernate.annotations.Where;
 public class Produto extends EntidadeDominio {
 
 	private double valorCompra;
+	@Temporal(TemporalType.DATE)
 	private Calendar dataEntrega;
 	private int quantidade;
 	@Column(name = "ativo")

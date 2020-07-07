@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,5 +48,10 @@ public abstract class AbstractController<T extends EntidadeDominio> {
 	@PutMapping
 	public ResponseEntity<EntidadeDominio> update(@RequestBody(required = true) T entidade) {
 		return commandAtualizar.execute(entidade);
+	}
+	@PatchMapping
+	public ResponseEntity<EntidadeDominio> patch(@NonNull T entidade) {
+		
+		return ResponseEntity.ok().body(entidade);
 	}
 }
