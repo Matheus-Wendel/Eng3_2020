@@ -26,7 +26,7 @@ public class Produto extends EntidadeDominio {
 	@JoinColumn(name = "comprador_id")
 	private Comprador comprador;
 	@OneToOne
-	@JoinColumn(name = "produto_id")
+	@JoinColumn(name = "ficha_tecnica_id")
 	private FichaTecnicaProduto fichaTecnica;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
