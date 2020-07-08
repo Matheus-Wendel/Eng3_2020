@@ -18,8 +18,6 @@ public class ValidaLinha implements IStrategy {
 	@Autowired
 	ProdutoRepository produtoRepository;
 
-	@Autowired
-	FichaTecnicaLinhaRepository fichaTecnicaLinhaRepository;
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
@@ -42,12 +40,6 @@ public class ValidaLinha implements IStrategy {
 					sb.append("Acessorio " + produto.getId() + " invalido");
 				}
 			}
-		}
-
-		Optional<FichaTecnicaLinha> findByIdFicha = fichaTecnicaLinhaRepository
-				.findById(linha.getFichaTecnica().getId());
-		if (!findByIdFicha.isPresent()) {
-			sb.append("ficha invalida");
 		}
 
 		return sb.toString();
