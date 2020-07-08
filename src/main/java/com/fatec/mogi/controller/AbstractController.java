@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +17,8 @@ import com.fatec.mogi.command.CommandBuscar;
 import com.fatec.mogi.command.CommandExcluir;
 import com.fatec.mogi.command.CommandSalvar;
 import com.fatec.mogi.model.EntidadeDominio;
-@CrossOrigin
+import com.sun.istack.NotNull;
+@CrossOrigin(origins = "*", maxAge = 3600L)
 public abstract class AbstractController<T extends EntidadeDominio> {
 
 	@Autowired
@@ -36,12 +36,12 @@ public abstract class AbstractController<T extends EntidadeDominio> {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<? extends EntidadeDominio>> find(@NonNull T entidade) {
+	public ResponseEntity<List<? extends EntidadeDominio>> find( @NotNull T entidade) {
 		return commandBuscar.execute(entidade);
 	}
 
 	@DeleteMapping
-	public ResponseEntity<EntidadeDominio> delete(@RequestBody(required = true) T entidade) {
+	public ResponseEntity<EntidadeDominio> delete(@RequestBody(required = true) T  entidade) {
 		return commandExcluir.execute(entidade);
 	}
 
@@ -49,9 +49,5 @@ public abstract class AbstractController<T extends EntidadeDominio> {
 	public ResponseEntity<EntidadeDominio> update(@RequestBody(required = true) T entidade) {
 		return commandAtualizar.execute(entidade);
 	}
-	@PatchMapping
-	public ResponseEntity<EntidadeDominio> patch(@NonNull T entidade) {
-		
-		return ResponseEntity.ok().body(entidade);
-	}
+
 }

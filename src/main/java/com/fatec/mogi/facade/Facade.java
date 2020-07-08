@@ -23,11 +23,14 @@ public class Facade implements Ifacade {
 	private GeraLog log;
 
 	@Autowired
-	public Facade(Map<String, IDAO> mapDAO, GeraLog geralog) {
+	public Facade(Map<String, IDAO> mapDAO, GeraLog geralog, StrategyUtil util) {
 		this.mapDAO = mapDAO;
-		StrategyUtil util = new StrategyUtil();
 		this.log = geralog;
 		mapStrategy = util.getStrategies();
+		
+		for (String s : mapStrategy.keySet()) {
+			System.err.println(s);
+		}
 	}
 
 	@Override
