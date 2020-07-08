@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.mogi.model.EntidadeDominio;
-import com.fatec.mogi.model.FichaTecnicaLinha;
 import com.fatec.mogi.model.Linha;
 import com.fatec.mogi.model.Produto;
-import com.fatec.mogi.repository.FichaTecnicaLinhaRepository;
 import com.fatec.mogi.repository.ProdutoRepository;
 @Service
 public class ValidaLinha implements IStrategy {

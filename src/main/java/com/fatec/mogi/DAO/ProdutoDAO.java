@@ -10,10 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.fatec.mogi.model.EntidadeDominio;
 import com.fatec.mogi.model.Produto;
+import com.fatec.mogi.repository.FichaTecnicaProdutoRepository;
 import com.fatec.mogi.repository.ProdutoRepository;
 @Service
 public class ProdutoDAO extends AbstractDAO<Produto> {
 
+	@Autowired
+	FichaTecnicaProdutoRepository fichaTecnicaProdutoRepository;
+	
 	ProdutoRepository  produtoRepository;
 	
 	@Autowired
@@ -26,10 +30,10 @@ public class ProdutoDAO extends AbstractDAO<Produto> {
 	@Override
 	@Transactional
 	public ResponseEntity<EntidadeDominio> delete(EntidadeDominio entidadeDominio) {
-		Produto entidade = (Produto) entidadeDominio;
+		Produto produto = (Produto) entidadeDominio;
 		try {
-			if (repositorio.existsById(entidade.getId())) {
-				produtoRepository.inativar(entidade.getId());
+			if (repositorio.existsById(produto.getId())) {
+				produtoRepository.inativar(produto.getId());
 				return ResponseEntity.ok().build();
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,4 +45,15 @@ public class ProdutoDAO extends AbstractDAO<Produto> {
 		}
 	}
 	
+	
+	@Override
+	public ResponseEntity<EntidadeDominio> save(EntidadeDominio entidadeDominio) {
+		Produto produto = (Produto) entidadeDominio;
+		
+		if(produto.getFichaTecnica().getId()==null) {
+			produto.setFichaTecnica(fichaTecnicaProdutoRepository.save(produto.getFichaTecnica()));
+		}
+		
+		return super.save(entidadeDominio);
+	}
 }

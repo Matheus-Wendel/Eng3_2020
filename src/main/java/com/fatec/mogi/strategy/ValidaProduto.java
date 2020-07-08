@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.fatec.mogi.model.Comprador;
 import com.fatec.mogi.model.EntidadeDominio;
-import com.fatec.mogi.model.FichaTecnicaProduto;
 import com.fatec.mogi.model.Linha;
 import com.fatec.mogi.model.Produto;
 import com.fatec.mogi.repository.CompradorRepository;
-import com.fatec.mogi.repository.FichaTecnicaProdutoRepository;
 import com.fatec.mogi.repository.LinhaRepository;
 @Service
 public class ValidaProduto implements IStrategy {
@@ -21,8 +19,7 @@ public class ValidaProduto implements IStrategy {
 	@Autowired
 	CompradorRepository compradorRepository;
 
-	@Autowired
-	FichaTecnicaProdutoRepository fichaTecnicaProdutoRepository;
+
 
 	@Autowired
 	LinhaRepository linhaRepository;
@@ -52,17 +49,11 @@ public class ValidaProduto implements IStrategy {
 		
 		produto.setComprador(compradorLogado);
 		
-		FichaTecnicaProduto fichaTecnica = produto.getFichaTecnica();
-		
-		Optional<FichaTecnicaProduto> findByIdFicha = fichaTecnicaProdutoRepository.findById(fichaTecnica.getId());
-		if (findByIdFicha.isEmpty()) {
-			sb.append("ficha invalida ");
-		}
 		List<Linha> linhas = produto.getLinhas();
 		
 		for (Linha linha : linhas) {
 			Optional<Linha> findByIdLinha = linhaRepository.findById(linha.getId());
-			if (findByIdLinha.isEmpty()) {
+			if (!findByIdLinha.isPresent()) {
 				sb.append("linha "+linha.getId()+" invalida ");
 			}
 		}
