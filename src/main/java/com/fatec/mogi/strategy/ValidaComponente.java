@@ -12,7 +12,7 @@ public class ValidaComponente implements IStrategy {
 		Componente componente = (Componente) entidade;
 		StringBuilder sb = new StringBuilder();
 		
-		if(componente.getNome().trim().isBlank()) {
+		if(componente.getNome().trim().isEmpty()) {
 			sb.append("Nome não pode ser vazio");
 		}
 		return sb.toString();

@@ -12,10 +12,10 @@ public class ValidaAcessorio implements IStrategy {
 		Acessorio acessorio = (Acessorio) entidade;
 		StringBuilder sb = new StringBuilder();
 		
-		if(acessorio.getDescricao().trim().isBlank()) {
+		if(acessorio.getDescricao().trim().isEmpty()) {
 			sb.append("Descricao  não pode ser vazia");
 		}
-		if(acessorio.getNome().trim().isBlank()) {
+		if(acessorio.getNome().trim().isEmpty()) {
 			sb.append("Nome  não pode ser vazio");
 		}
 		if(acessorio.getQuantidade() <= 0) {

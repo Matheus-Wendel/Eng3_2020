@@ -23,10 +23,10 @@ public class ValidaFichaTecnicaLinha implements IStrategy {
 		
 		
 		
-		if(fichaTecnicaLinha.getNome().trim().isBlank()) {
+		if(fichaTecnicaLinha.getNome().trim().isEmpty()) {
 			sb.append("Nome não pode ser vazio");
 		}
-		if(fichaTecnicaLinha.getDescricao().trim().isBlank()) {
+		if(fichaTecnicaLinha.getDescricao().trim().isEmpty()) {
 			sb.append("Descricao não pode ser vazio");
 		}
 		List<Acessorio> acessorios = fichaTecnicaLinha.getAcessorios();

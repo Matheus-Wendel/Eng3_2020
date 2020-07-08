@@ -27,13 +27,13 @@ public class ValidaFichaTecnicaProduto implements IStrategy {
 		
 		
 		
-		if(fichaTecnicaProduto.getNome().trim().isBlank()) {
+		if(fichaTecnicaProduto.getNome().trim().isEmpty()) {
 			sb.append("Nome invalido");
 		}
-		if(fichaTecnicaProduto.getDescricao().trim().isBlank()) {
+		if(fichaTecnicaProduto.getDescricao().trim().isEmpty()) {
 			sb.append("Descricao invalido");
 		}
-		if (fichaTecnicaProduto.getCategoria()==null||fichaTecnicaProduto.getCategoria().trim().isBlank()) {
+		if (fichaTecnicaProduto.getCategoria()==null||fichaTecnicaProduto.getCategoria().trim().isEmpty()) {
 			sb.append("categoria invalida");
 		}
 		if (fichaTecnicaProduto.getSubcategoria()==null || fichaTecnicaProduto.getSubcategoria().trim().isEmpty()) {

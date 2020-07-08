@@ -16,10 +16,10 @@ public class ValidaComprador implements IStrategy {
 		
 		sb.append(validaSenha.processar(entidade));
 		
-		if(comprador.getNome().trim().isBlank()) {
+		if(comprador.getNome().trim().isEmpty()) {
 			sb.append("Nome não pode ser vazio");
 		}
-		if(comprador.getLogin().trim().isBlank()) {
+		if(comprador.getLogin().trim().isEmpty()) {
 			sb.append("login não pode ser vazio");
 		}
 		return sb.toString();

@@ -36,7 +36,7 @@ public class ValidaProduto implements IStrategy {
 		if (produto.getDataEntrega() == null) {
 			sb.append("data de entrega invalida ");
 		}
-		if (produto.getNome() == null || produto.getNome().trim().isBlank()) {
+		if (produto.getNome() == null || produto.getNome().trim().isEmpty()) {
 			sb.append("Nome invalido ");
 
 		}
