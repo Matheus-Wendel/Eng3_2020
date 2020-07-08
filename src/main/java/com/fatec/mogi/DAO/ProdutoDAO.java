@@ -56,4 +56,14 @@ public class ProdutoDAO extends AbstractDAO<Produto> {
 		
 		return super.save(entidadeDominio);
 	}
+	
+	@Override
+	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidadeDominio) {
+		Produto produto = (Produto) entidadeDominio;
+		if(produto.getFichaTecnica()!=null&&produto.getFichaTecnica().getId()!=null) {
+			produto.setFichaTecnica(fichaTecnicaProdutoRepository.save(produto.getFichaTecnica()));
+		}
+		produto.setAtivo(true);
+		return super.update(entidadeDominio);
+	}
 }

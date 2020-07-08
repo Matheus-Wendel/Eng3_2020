@@ -86,8 +86,8 @@ public class AbstractDAO<T extends EntidadeDominio> implements IDAO {
 	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidadeDominio) {
 		T entidade = (T) entidadeDominio;
 		try {
-			T entidadeSalva = repositorio.save(entidade);
 			if (repositorio.existsById(entidade.getId())) {
+				T entidadeSalva = repositorio.save(entidade);
 				return ResponseEntity.ok().body(entidadeSalva);
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

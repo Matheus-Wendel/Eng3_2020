@@ -34,4 +34,15 @@ public class LinhaDAO extends AbstractDAO<Linha> {
 		}
 		return super.save(entidadeDominio);
 	}
+	
+	
+	@Override
+	public ResponseEntity<EntidadeDominio> update(EntidadeDominio entidadeDominio) {
+		Linha linha = (Linha) entidadeDominio;
+		//CADASTRANDO A FICHA JUNTO
+		if(linha.getFichaTecnica().getId()!=null) {
+			linha.setFichaTecnica(fichaTecnicaLinhaRepository.save(linha.getFichaTecnica()));
+		}
+		return super.update(entidadeDominio);
+	}
 }
